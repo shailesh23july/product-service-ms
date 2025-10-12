@@ -6,13 +6,7 @@ import com.scaler.productservice.dtos.CreateProductResponseDto;
 import com.scaler.productservice.model.Product;
 import com.scaler.productservice.services.ProductService;
 import com.scaler.productservice.services.ProductServiceType;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Map;
@@ -37,17 +31,23 @@ public class ProductController {
         return CreateProductResponseDto.fromProduct(product);
     }
 
+    @PutMapping("/{productId}")
+    public void updateProduct(final @PathVariable("productId") Long productId, final @RequestBody CreateProductResponseDto productResponseDto) {
+        productServiceMap.get(FAKESTORE_IMPLEMENTATION).updateProduct(productId, productResponseDto);
+    }
+
     @GetMapping
     public void getAllProducts() {
 
     }
 
     @GetMapping("/{productId}")
-    public void getSingleProduct(final @PathVariable("productId") Long productId) {
-
+    public Product getSingleProduct(final @PathVariable("productId") Long productId) {
+        return productServiceMap.get(FAKESTORE_IMPLEMENTATION).getProduct(productId);
     }
 
     @DeleteMapping("/{productId}")
-    public void deleteProduct(final @PathVariable("productId") String productId) {
+    public void deleteProduct(final @PathVariable("productId") Long productId) {
+        productServiceMap.get(FAKESTORE_IMPLEMENTATION).deleteProduct(productId);
     }
 }
