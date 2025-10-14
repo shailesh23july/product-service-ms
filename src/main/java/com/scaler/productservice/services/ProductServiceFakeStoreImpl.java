@@ -38,7 +38,7 @@ public class ProductServiceFakeStoreImpl implements ProductService {
         fakeStoreCreateProductDto.setTitle(product.getTitle());
         fakeStoreCreateProductDto.setDescription(product.getDescription());
         fakeStoreCreateProductDto.setPrice(product.getPrice());
-        fakeStoreCreateProductDto.setCategory(product.getCategoryName());
+
         fakeStoreCreateProductDto.setImage(product.getImageUrl());
         return fakeStoreCreateProductDto;
     }
@@ -49,7 +49,7 @@ public class ProductServiceFakeStoreImpl implements ProductService {
         newProduct.setTitle(response.getTitle());
         newProduct.setDescription(response.getDescription());
         newProduct.setPrice(response.getPrice());
-        newProduct.setCategoryName(response.getCategory());
+
         newProduct.setImageUrl(response.getImage());
         return newProduct;
     }

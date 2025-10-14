@@ -1,5 +1,6 @@
 package com.scaler.productservice.dtos;
 
+import com.scaler.productservice.model.Category;
 import com.scaler.productservice.model.Product;
 import lombok.Data;
 
@@ -17,7 +18,8 @@ public class CreateProductRequestDto {
         product.setDescription(this.description);
         product.setPrice(this.price);
         product.setImageUrl(this.imageUrl);
-        product.setCategoryName(this.categoryName);
+        Category category = Category.builder().name(this.categoryName).build();
+        product.setCategory(category);
         return product;
     }
 }
