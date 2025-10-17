@@ -20,11 +20,17 @@ public class ProductServiceDBImpl implements ProductService{
 
     @Override
     public Product createProduct(Product product) {
-//        Category productCategory = categoryRepository.findByName(product.getCategory().getName()).orElseGet(() -> {
-//            Category category = Category.builder().name(product.getCategory().getName()).build();
-//            return categoryRepository.save(category);
-//        });
-//        product.setCategory(productCategory);
+        // Ensure category is persisted and reused if exists
+        String categoryName = product.getCategory().getName();
+        Category productCategory = categoryRepository.findByName(categoryName)
+                .orElseGet(() -> {
+                    Category category = Category.builder()
+                        .name(categoryName)
+                        .description(product.getCategory().getDescription())
+                        .build();
+                    return categoryRepository.save(category);
+                });
+        product.setCategory(productCategory);
         return productRepository.save(product);
     }
 

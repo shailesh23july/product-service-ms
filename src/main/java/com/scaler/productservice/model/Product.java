@@ -19,7 +19,7 @@ public class Product extends BaseModel {
 
     private double price;
 
-    @ManyToOne(cascade = CascadeType.MERGE)
+    @ManyToOne(cascade = {CascadeType.MERGE})
     private Category category;
 
     private String imageUrl;
